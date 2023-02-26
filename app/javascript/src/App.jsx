@@ -1,5 +1,7 @@
 import React from "react";
 
-const App = () => <h1>Referral Tracker</h1>;
+import Navbar from "components/Navbar";
+
+const App = () => <Navbar />;
 
 export default App;
