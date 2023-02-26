@@ -1,7 +1,9 @@
 module.exports = {
     resolve: {
       alias: {
-        components: "src/components"
+        components: "src/components",
+        constants: "src/constants",
+        styles: "src/styles",
       },
     },
   };
