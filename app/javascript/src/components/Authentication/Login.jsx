@@ -12,15 +12,15 @@ import {
 } from "@mui/material";
 import { Form, FormikProvider, useFormik } from "formik";
 
-import { INITIAL_VALUES, validationSchema } from "constants/Login";
-import { ContentStyle, RootStyle, HeadingStyle } from "styles/Login";
+import { INITIAL_VALUES, VALIDATION_SCHEMA } from "constants/Login";
+import { ContentStyle, RootStyle, HeadingStyle } from "styles/authentication";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const formik = useFormik({
     initialValues: INITIAL_VALUES,
-    validationSchema,
+    VALIDATION_SCHEMA,
     onSubmit: values => {
       console.log("submitting...");
       console.log(values);
