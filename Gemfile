@@ -64,3 +64,7 @@ end
 gem "webpacker"
 
 gem "react-rails"
+
+gem "devise"
+
+gem "devise_token_auth"
