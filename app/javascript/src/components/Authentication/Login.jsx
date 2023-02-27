@@ -11,20 +11,38 @@ import {
   IconButton,
 } from "@mui/material";
 import { Form, FormikProvider, useFormik } from "formik";
+import { useSnackbar } from "notistack";
+import { Link } from "react-router-dom";
 
+import { setAuthHeaders } from "apis/axios";
 import usersApi from "apis/users";
 import { INITIAL_VALUES, VALIDATION_SCHEMA } from "constants/Login";
+import { LOGIN_SUCCESS_MESSAGE } from "constants/ToastrMessages";
+import { setToLocalStorage } from "helpers/storage";
 import { ContentStyle, RootStyle, HeadingStyle } from "styles/authentication";
+import { getErrorMessage } from "utils/getErrorMessage";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleLogin = async values => {
     try {
       const response = await usersApi.login(values);
-      console.log(response);
+      const { data, headers } = response;
+      setToLocalStorage({
+        authToken: headers["access-token"],
+        client: headers?.client,
+        email: data?.data?.email,
+        userId: data?.data?.id,
+      });
+      setAuthHeaders();
+      setAuthHeaders();
+      setTimeout(() => (window.location.href = "/"), 2000);
+      enqueueSnackbar(LOGIN_SUCCESS_MESSAGE, { variant: "success" });
     } catch (error) {
       console.log(error);
+      enqueueSnackbar(getErrorMessage(error), { variant: "error" });
     }
   };
 
@@ -98,9 +116,10 @@ const Login = () => {
             </Form>
           </FormikProvider>
           <Typography align="center" sx={{ mt: 3 }} variant="body2">
-            Don’t have an account?
-            <span> Sign up</span>
-            {/* Signup should be a link */}
+            Don’t have an account?{" "}
+            <Link to="/signup">
+              <Typography display="inline">Sign up</Typography>
+            </Link>
           </Typography>
         </ContentStyle>
       </Container>

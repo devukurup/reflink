@@ -1,23 +1,41 @@
 import React, { useState, useEffect } from "react";
 
-import { Typography } from "@mui/material";
+import { Skeleton } from "@mui/material";
+import { SnackbarProvider } from "notistack";
 
-import Login from "components/Authentication/Login";
-
-import { setAuthHeaders } from "./apis/axios";
+import { setAuthHeaders, registerIntercepts } from "apis/axios";
+import Main from "components/Main";
+import { AuthProvider } from "contexts/auth";
+import { RootStyle } from "styles/authentication";
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    registerIntercepts();
     setAuthHeaders(setIsLoading);
   }, []);
 
   if (isLoading) {
-    return <Typography>Loading....</Typography>;
+    return (
+      <RootStyle>
+        <Skeleton
+          animation="wave"
+          height={250}
+          variant="circular"
+          width={250}
+        />
+      </RootStyle>
+    );
   }
 
-  return <Login />;
+  return (
+    <AuthProvider>
+      <SnackbarProvider maxSnack={3}>
+        <Main />
+      </SnackbarProvider>
+    </AuthProvider>
+  );
 };
 
 export default App;

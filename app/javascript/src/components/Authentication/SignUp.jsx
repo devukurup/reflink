@@ -12,20 +12,26 @@ import {
   IconButton,
 } from "@mui/material";
 import { Form, FormikProvider, useFormik } from "formik";
+import { useSnackbar } from "notistack";
+import { Link } from "react-router-dom";
 
 import usersApi from "apis/users";
 import { INITIAL_VALUES, VALIDATION_SCHEMA } from "constants/SignUp";
+import { SIGN_UP_SUCCESS_MESSAGE } from "constants/ToastrMessages";
 import { RootStyle, ContentStyle, HeadingStyle } from "styles/authentication";
+import { getErrorMessage } from "utils/getErrorMessage";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
-
+  const { enqueueSnackbar } = useSnackbar();
   const handleSignUp = async values => {
     try {
-      const response = await usersApi.create(values);
-      console.log(response);
+      await usersApi.create(values);
+      enqueueSnackbar(SIGN_UP_SUCCESS_MESSAGE, { variant: "success" });
+      setTimeout(() => (window.location.href = "/"), 2000);
     } catch (error) {
       console.log(error);
+      enqueueSnackbar(getErrorMessage(error), { variant: "error" });
     }
   };
 
@@ -129,10 +135,9 @@ const SignUp = () => {
           </FormikProvider>
           <Typography align="center" sx={{ mt: 3 }} variant="body2">
             Have an account?{" "}
-            {/* <Link variant="subtitle2" component={RouterLink} to="/login">
-              Login
-            </Link> */}
-            {/* Add a link to Login page */}
+            <Link to="/">
+              <Typography display="inline">Login</Typography>
+            </Link>
           </Typography>
         </ContentStyle>
       </Container>
