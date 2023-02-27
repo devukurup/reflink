@@ -13,18 +13,26 @@ import {
 } from "@mui/material";
 import { Form, FormikProvider, useFormik } from "formik";
 
+import usersApi from "apis/users";
 import { INITIAL_VALUES, VALIDATION_SCHEMA } from "constants/SignUp";
 import { RootStyle, ContentStyle, HeadingStyle } from "styles/authentication";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
 
+  const handleSignUp = async values => {
+    try {
+      const response = await usersApi.create(values);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const formik = useFormik({
     initialValues: INITIAL_VALUES,
     validationSchema: VALIDATION_SCHEMA,
-    onSubmit: values => {
-      console.log(values);
-    },
+    onSubmit: handleSignUp,
   });
 
   const { errors, touched, handleSubmit, isSubmitting, getFieldProps } = formik;
@@ -43,22 +51,21 @@ const SignUp = () => {
                   <TextField
                     fullWidth
                     placeholder="First name"
-                    {...getFieldProps("firstName")}
-                    error={Boolean(touched.firstName && errors.firstName)}
-                    helperText={touched.firstName && errors.firstName}
+                    {...getFieldProps("first_name")}
+                    error={Boolean(touched.first_name && errors.first_name)}
+                    helperText={touched.first_name && errors.first_name}
                   />
                   <TextField
                     fullWidth
                     placeholder="Last name"
-                    {...getFieldProps("lastName")}
-                    error={Boolean(touched.lastName && errors.lastName)}
-                    helperText={touched.lastName && errors.lastName}
+                    {...getFieldProps("last_name")}
+                    error={Boolean(touched.last_name && errors.last_name)}
+                    helperText={touched.last_name && errors.last_name}
                   />
                 </Stack>
                 <Stack spacing={3}>
                   <TextField
                     fullWidth
-                    autoComplete="username"
                     placeholder="Email address"
                     type="email"
                     {...getFieldProps("email")}
@@ -67,7 +74,6 @@ const SignUp = () => {
                   />
                   <TextField
                     fullWidth
-                    autoComplete="current-password"
                     placeholder="Password"
                     type={showPassword ? "text" : "password"}
                     {...getFieldProps("password")}
@@ -91,6 +97,20 @@ const SignUp = () => {
                         </InputAdornment>
                       ),
                     }}
+                  />
+                  <TextField
+                    fullWidth
+                    placeholder="Confirm Password"
+                    type="password"
+                    {...getFieldProps("password_confirmation")}
+                    error={Boolean(
+                      touched.password_confirmation &&
+                        errors.password_confirmation
+                    )}
+                    helperText={
+                      touched.password_confirmation &&
+                      errors.password_confirmation
+                    }
                   />
                 </Stack>
                 <Box>

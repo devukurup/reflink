@@ -12,19 +12,26 @@ import {
 } from "@mui/material";
 import { Form, FormikProvider, useFormik } from "formik";
 
+import usersApi from "apis/users";
 import { INITIAL_VALUES, VALIDATION_SCHEMA } from "constants/Login";
 import { ContentStyle, RootStyle, HeadingStyle } from "styles/authentication";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
+  const handleLogin = async values => {
+    try {
+      const response = await usersApi.login(values);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const formik = useFormik({
     initialValues: INITIAL_VALUES,
     VALIDATION_SCHEMA,
-    onSubmit: values => {
-      console.log("submitting...");
-      console.log(values);
-    },
+    onSubmit: handleLogin,
   });
 
   const { errors, touched, isSubmitting, getFieldProps } = formik;
