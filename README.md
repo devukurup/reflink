@@ -1,24 +1,48 @@
-# README
+# Referral Tracker
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Prerequisite
+-->  Ruby (3.0.1)
 
-Things you may want to cover:
+-->  Rails (7.0.1)
 
-* Ruby version
+-->  MySql2 (~> 0.5)
 
-* System dependencies
+-->  Mailcatcher
+<br/>
+<br />
 
-* Configuration
+### Initial Setup
 
-* Database creation
+```bash
+git clone https://github.com/devukurup/referral_tracker.git
 
-* Database initialization
+cd referral_tracker
 
-* How to run the test suite
+yarn install
 
-* Services (job queues, cache servers, search engines, etc.)
+./bin/setup
 
-* Deployment instructions
+To start the server:
+bundle exec rails server
 
-* ...
+Visit: http://127.0.0.1:3000
+
+```
+<br />
+
+To verify the referral mails
+
+```bash
+gem install mailcatcher
+
+Run: mailcatcher
+
+Visit: http://127.0.0.1:1080
+```
+
+Login Credentials:
+
+```
+email: "abc@example.com"
+password: "welcome123"
+```
