@@ -68,3 +68,5 @@ gem "react-rails"
 gem "devise"
 
 gem "devise_token_auth"
+
+gem "devise_invitable", "~> 2.0.0"

@@ -42,6 +42,7 @@
     "@mui/icons-material": "^5.11.9",
     "@mui/lab": "^5.0.0-alpha.120",
     "@mui/material": "^5.11.10",
+    "@mui/x-data-grid": "^5.17.25",
     "@rails/webpacker": "5.4.0",
     "axios": "^1.3.4",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
