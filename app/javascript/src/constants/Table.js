@@ -12,8 +12,8 @@ export const COLUMN_DATA = [
     field: "invitation_status",
     headerName: "Invitation Status",
     flex: 1,
-    renderCell: params =>
-      params.invitation_status?.includes("accepted") ?
+    renderCell: record =>
+      record?.value?.includes("accepted") ?
         (<Typography
           sx={{ borderRadius: '8px', padding: 0.5, color: green[50], backgroundColor: green[500] }}
         >
@@ -27,29 +27,4 @@ export const COLUMN_DATA = [
         </Typography>
     )
   },
-];
-
-export const ROW_DATA = [
-  {
-    id: 1,
-    email: "abc@gmail.com",
-    invitation_status: "accepted",
-  },
-  {
-    id: 2,
-    email: "bcd@gmail.com",
-    invitation_status: "pending",
-  },
-  {
-    id: 3,
-    email: "abc@gmail.com",
-    invitation_status: "accepted",
-  },
-  { id: 4, email: "bcd@gmail.com", invitation_status: "pending" },
-  { id: 5, email: "abc@gmail.com", invitation_status: "accepted" },
-  { id: 6, email: "bcd@gmail.com", invitation_status: "pending" },
-  { id: 7, email: "abc@gmail.com", invitation_status: "accepted" },
-  { id: 8, email: "bcd@gmail.com", invitation_status: "pending" },
-  { id: 9, email: "abc@gmail.com", invitation_status: "accepted" },
-  { id: 10, email: "bcd@gmail.com", invitation_status: "pending" },
 ];

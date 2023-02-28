@@ -1,19 +1,25 @@
 import { Box, Modal, TextField, Typography, Button, Stack } from '@mui/material';
 import React, { useState } from 'react';
 import { style } from 'styles/Modal';
+import invitationApi from "apis/invite";
+import { useSnackbar } from "notistack";
 
-const InviteUserModal = ({ isModalOpen, setIsModalOpen }) => {
+const InviteUserModal = ({ isModalOpen, setIsModalOpen, fetchInvitedUsers }) => {
+  const { enqueueSnackbar } = useSnackbar();
   const [email, setEmail] = useState("");
-const handleInvite = () => {
-  // try{
-
-  // }
-  // catch(error) {
-
-  // }
-  // finally {
-  //   setIsModalOpen(false);
-  // }
+const handleInvite = async () => {
+  try{
+    const response = await invitationApi.create({email});
+    enqueueSnackbar(response?.data?.notice, { variant: "success" });
+    fetchInvitedUsers();
+  }
+  catch(error) {
+    console.log(error);
+    enqueueSnackbar(error?.response?.data?.error, { variant: "error" });
+  }
+  finally {
+    setIsModalOpen(false);
+  }
 }
 
   return (

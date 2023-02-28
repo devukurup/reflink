@@ -10,6 +10,11 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[7.0]
       ## Database authenticatable
       t.string :encrypted_password, null: false, default: ""
 
+      ## Recoverable
+      t.string :reset_password_token
+      t.datetime :reset_password_sent_at
+      t.boolean :allow_password_change, default: false
+
       ## User Info
       t.string :first_name
       t.string :last_name
