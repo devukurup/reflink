@@ -1,13 +1,11 @@
-# Referral Tracker
+# reflink
+A simple referral management system that supports user authentication, referral invitations via email, and dashboard tracking for accepted invites.
 
 ### Prerequisite
--->  Ruby (3.0.1)
-
--->  Rails (7.0.1)
-
--->  MySql2 (~> 0.5)
-
--->  Mailcatcher
+-  Ruby (3.0.1)
+-  Rails (7.0.1)
+-  MySql2 (~> 0.5)
+-  Mailcatcher
 <br/>
 <br />
 
